@@ -167,7 +167,7 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                                 bottomEnd = 10.dp
                             ),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = Color.Gray,     // Cor ao clicar
+                                focusedBorderColor = azul,     // Cor ao clicar
                                 unfocusedBorderColor = azul,   // Cor padrão sem clicar
 //                                disabledBorderColor = Color.Blue,    // Cor se o campo for desabilitado
                                 errorBorderColor = Color.Red        // Cor mesmo se houver erro de validação
@@ -202,7 +202,7 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                                 bottomEnd = 10.dp
                             ),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedBorderColor = Color.Gray,     // Cor ao clicar
+                                focusedBorderColor = azul,     // Cor ao clicar
                                 unfocusedBorderColor = azul,   // Cor padrão sem clicar
 //                                disabledBorderColor = Color.Blue,    // Cor se o campo for desabilitado
                                 errorBorderColor = Color.Red        // Cor mesmo se houver erro de validação
