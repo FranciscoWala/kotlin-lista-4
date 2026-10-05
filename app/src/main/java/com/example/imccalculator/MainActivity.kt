@@ -66,6 +66,9 @@ fun IMCScreen(modifier: Modifier = Modifier) {
 
     val azul = colorResource(id = R.color.cor_app)
 
+    var resultOn by remember {
+        mutableStateOf(false) }
+
     var peso by remember {
         mutableStateOf("")
     }
@@ -140,6 +143,7 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number
                             ),
+                                    singleLine = true,
                             value = altura,
                             onValueChange = {novoValor ->
                                 altura = novoValor
@@ -174,6 +178,7 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Number
                             ),
+                            singleLine = true,
                             value = peso,
                             onValueChange = { novoValor ->
                                 peso = novoValor
@@ -208,6 +213,7 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                             onClick = {
                                 imcCalculado = calcularImc(altura, peso)
                                 classificacaoCor = cardIMCColor(definirStatusIMC(imcCalculado))
+                                resultOn = true
                             },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = azul
@@ -219,26 +225,47 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                                 color = Color.White
                             )
                         }
+                        Button(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            onClick = {
+                                altura = ""
+                                peso = ""
+                                resultOn = false
+                            },
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Gray
+                            )
+                        ) {
+                            Text(
+                                text = "Limpar",
+                                fontWeight = FontWeight.Bold,
+                                color = Color.White
+                            )
+                        }
                 }
             }
-            Card(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                colors = CardDefaults.cardColors(containerColor = classificacaoCor),
-                elevation = CardDefaults.cardElevation(4.dp),
-            ) {
-                Column(
+
+            if ( resultOn ) {
+                Card(
                     modifier = Modifier
-                        .fillMaxSize(),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
+                        .fillMaxWidth()
+                        .height(60.dp),
+                    colors = CardDefaults.cardColors(containerColor = classificacaoCor),
+                    elevation = CardDefaults.cardElevation(4.dp),
                 ) {
-                    Text(
-                        text = "${imcCalculado.toString().take(4)} ${definirStatusIMC(imcCalculado)}",
-                        textAlign = TextAlign.Center,
-                        color = Color.White
-                    )
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "${imcCalculado.toString().take(4)} ${definirStatusIMC(imcCalculado)}",
+                            textAlign = TextAlign.Center,
+                            color = Color.White
+                        )
+                    }
                 }
             }
         }
@@ -256,7 +283,6 @@ fun calcularImc (altura : String, peso : String) : Double{
 
     return imc
 
-
 }
 
 fun definirStatusIMC (imc : Double) : String{
@@ -270,7 +296,6 @@ fun definirStatusIMC (imc : Double) : String{
         imc >= 35 && imc < 40 -> "Obesidade II"
         else -> "Obesidade grau III"
     }
-
 
 }
 
