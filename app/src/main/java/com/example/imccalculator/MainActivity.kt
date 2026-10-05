@@ -134,7 +134,9 @@ fun IMCScreen(modifier: Modifier = Modifier) {
                 ) {
                     Text(
                         text = "Seus dados",
-                        color = azul
+                        color = azul,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
                     )
 
                         OutlinedTextField(
